@@ -1,0 +1,203 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+	<title>Cartographie AVA </title>
+	<meta charset="utf-8" />
+
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	
+	<link rel="stylesheet" href="style.css" />
+	<link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.css" /> <!-- style Leaflet-->
+	<link rel="stylesheet" href="DATA_AVA/leaflet.draw.css" /><!-- plugin règle (image)-->
+	<link rel="stylesheet" href="DATA_AVA/measure-control.css" /><!--plugin règle-->
+	<link rel="stylesheet" href="DATA_AVA/leaflet.viewcenter.css" /> <!--plugin recentrer la carte-->
+	<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css"><!-- plugin slide menu (image)-->
+	<link rel="stylesheet" href="DATA_AVA/L.Control.SlideMenu.css" /> <!--plugin menu-->
+	
+		
+
+</head>
+<body>
+
+		<div id="entete">
+		    
+			 <div class="tableau">
+			 <table>
+			 
+				<tr>
+				
+				<th>  </th>
+				
+				</tr>
+				
+				<tr><td><img src="AVA logo.jpg"width="180px "/> </td><td>Bienvenue sur le portail<br /> de <strong>l'Association des Viticulteurs d'Alsace</strong></td></tr>
+				
+			 </table>
+			 
+			 </div> <!--fin div tableau-->
+			
+			</div> <!--fin div entete-->
+		
+
+	<div id="map" style="width:90%; height: 630px"></div>
+
+		
+	<script src="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.js"></script> <!-- Bibliothèque js Leaflet-->
+	
+		<!--Leaflet Plugins-->
+	<script src="http://code.jquery.com/jquery-3.1.0.min.js"  
+	integrity="sha256-cCueBR6CsyA4/9szpPfrX3s49M9vUU5BgtiJj06wt/s="   
+	crossorigin="anonymous"></script>
+	<script src="http://localhost/DATA_AVA/leaflet.ajax.min.js"></script> <!-- Plugin d'affichage des GeoJSON-->
+	<script src="http://localhost/DATA_AVA/leaflet.draw.js"></script> <!-- plugin règle (image)-->
+	<script src="http://localhost/DATA_AVA/leaflet.measurecontrol.js"></script> <!-- plugin règle-->
+	<script src="http://localhost/DATA_AVA/leaflet.viewcenter.js"></script> <!-- plugin recentrage de la carte-->
+	<script src="http://localhost/DATA_AVA/L.Control.SlideMenu.js"></script> <!-- plugin d'affichage du menu-->
+	
+	
+	<script>
+	//Ajout de markers de localisation des villes
+		
+		var cities = new L.LayerGroup() ;
+	
+		L.marker([48.1056,7.38556]).bindPopup("<b>Bienvenue à Colmar</b><br />").addTo(cities),
+		L.marker([48.1951,7.3194]).bindPopup("<b>Bienvenue à Ribeauvillé</b><br />").addTo(cities),
+		L.marker([48.4076,7.4487]).bindPopup("<b>Bienvenue à Barr</b><br />").addTo(cities),
+		L.marker([48.5404, 7.492]).bindPopup("<b>Bienvenue à Molsheim</b><br />").addTo(cities),
+		L.marker([47.9167,7.2]).bindPopup("<b>Bienvenue à Guebwiller</b><br />").addTo(cities),
+		L.marker([47.9579,7.3002]).bindPopup("<b>Bienvenue à Rouffach</b><br />").addTo(cities),
+		L.marker([49.0333,7.95]).bindPopup("<b>Bienvenue à Wissembourg</b><br />").addTo(cities);
+		
+		// Attribution et sources + liens d'accès aux tuiles Mapbox
+	    var mbAttr = 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, ' +
+				'<a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, ' +
+				'Imagery © <a href="http://mapbox.com">Mapbox</a>',
+			mbUrl = 'https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpandmbXliNDBjZWd2M2x6bDk3c2ZtOTkifQ._QA7i5Mpkd_m30IGElHziw';
+			
+			//Outil d'aafichage des couches initiales	
+			
+		  var  satellite  = L.tileLayer(mbUrl, {id: 'mapbox.satellite',opacity: 0.8, attribution: mbAttr}),
+				streets   = L.tileLayer(mbUrl, {id: 'mapbox.streets', attribution: mbAttr});
+		  
+			// Affichage des couches GeoJSON
+		var contour = new L.GeoJSON.AJAX("http://localhost/DATA/Alsace_admin/testcontour.geojson", {style: stylecontour});
+			function stylecontour(feature){
+				return{
+					weight: 4,
+					opacity: 1,
+					color: ' ThreedShadow ', //contour
+					fillColor: 'none'
+						};
+							} 
+
+		var aocparc = new L.GeoJSON.AJAX("http://localhost/DATA/Alsace_AOC/aocparc2.geojson", {style: styleaocparc});
+			function styleaocparc(feature){
+				return{
+					weight: 1,
+					opacity: 0.5,
+					color: 'Azure', //contour
+					fillColor: 'Azure', //remplissage
+					fillOpacity: 0.6
+						};
+							}
+			
+		var comviti = new L.GeoJSON.AJAX("http://localhost/DATA/Alsace_AOC/comviticole.geojson", {style: stylecomviti});
+				function stylecomviti(feature){
+					return{
+						weight: 1,
+						opacity: 1,
+						color: '#CECECE', //contour
+						fillColor: 'Silver', //remplissage
+						fillOpacity: 0.6
+							};
+								}		
+		
+		
+		var pe = new L.GeoJSON.AJAX("http://localhost/DATA/PE/pe.geojson");
+			var sols = new L.GeoJSON.AJAX("http://localhost/DATA/Donn%c3%a9es%20sols/sols.geojson" ,{style:styleSOLS});
+							function styleSOLS(feature){
+  return{
+    fillColor: getColor(feature.properties.PAYSAGE),
+    weight: 2,
+    opacity: 1,
+    color: 'white',
+    fillOpacity: 0.7
+  };
+}
+
+function getColor(a){
+  return  a== Terrains argilo-marneux et marno-calcaires ? '#006D2C':   
+          a== Terrains de bas fonds  ? '#31A354':
+          a== Terrains de Lehm ? '#74C476':
+          a== Terrains loessiques ? '#A1D99B':
+                  '#C7E9C0'; }
+	
+	
+		
+		
+		// Affichage de la carte
+		var map = L.map('map', {
+			center: [48.2667,7.4214],
+			zoom: 8,
+			layers: [streets, cities]
+		});
+		
+	
+		var baseLayers = {
+			"Plan": streets,
+			"Imagerie": satellite
+			
+			
+		};
+
+		var overlays = {
+			"Contour Administratif": contour,
+			"Communes Viticoles": comviti,
+			"Parcelles AOC": aocparc,
+			"Plan d'encépagement": pe,
+			"Données des sols": sols,
+			"Villes": cities
+		};
+
+		L.control.layers(baseLayers, overlays).addTo(map);
+		
+		contour.addTo(map);
+		aocparc.addTo(map);
+		comviti.addTo(map);
+		//pe.addTo(map);
+		sols.addTo(map);
+		
+		//Outil de mesure
+	L.Control.measureControl({position: "topright"}).addTo(map);
+ 
+		// Zoom page entière: on centre large
+		var viewCenter = new L.Control.ViewCenter();
+		map.addControl(viewCenter);
+
+		//Echelle
+	L.control.scale({position:'bottomright', imperial: false}).addTo(map);
+
+//Changer le fond de carte: plan=>orthophoto avec le changement de zoom
+
+		// Insérer une fenêtre de menu pour le formulaire de recherche
+	
+           	var right = '<h2>Formulaire de recherche</h2>';
+            var contents = '<hr>';
+            contents += '<h3><strong>Commune</strong></h3>';
+            contents += '<p><input type="text" name="commune" placeholder="Nom de la commune"/>.<br></p>';
+            contents += '<h3><strong>Section</strong></h3>';
+            contents += '<p><input type="text" name="section" placeholder="N° de section"/></p>';
+            contents += '<h3><strong>Parcelle</strong></h3>';
+            contents += '<p><input type="text" name="parcelle" placeholder="N° de parcelle"/>.</br></p>';
+            contents += '<p><br><input type="submit" name="envoi" value="Rechercher"/></br></p>';
+			
+           
+            var slideMenu = L.control.slideMenu('', {position: 'topleft', width: '200px', height: '400px'}).addTo(map);
+            slideMenu.setContents(right + contents);
+
+	
+
+</script> <!-- fin de script js-->
+	
+	</body>
+</html>

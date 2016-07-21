@@ -48,11 +48,11 @@
 	<script src="http://code.jquery.com/jquery-3.1.0.min.js"  
 	integrity="sha256-cCueBR6CsyA4/9szpPfrX3s49M9vUU5BgtiJj06wt/s="   
 	crossorigin="anonymous"></script>
-	<script src="http://localhost/DATA_AVA/leaflet.ajax.min.js"></script> <!-- Plugin d'affichage des GeoJSON-->
-	<script src="http://localhost/DATA_AVA/leaflet.draw.js"></script> <!-- plugin règle (image)-->
-	<script src="http://localhost/DATA_AVA/leaflet.measurecontrol.js"></script> <!-- plugin règle-->
-	<script src="http://localhost/DATA_AVA/leaflet.viewcenter.js"></script> <!-- plugin recentrage de la carte-->
-	<script src="http://localhost/DATA_AVA/L.Control.SlideMenu.js"></script> <!-- plugin d'affichage du menu-->
+	<script src="DATA_AVA/leaflet.ajax.min.js"></script> <!-- Plugin d'affichage des GeoJSON-->
+	<script src="DATA_AVA/leaflet.draw.js"></script> <!-- plugin règle (image)-->
+	<script src="DATA_AVA/leaflet.measurecontrol.js"></script> <!-- plugin règle-->
+	<script src="DATA_AVA/leaflet.viewcenter.js"></script> <!-- plugin recentrage de la carte-->
+	<script src="DATA_AVA/L.Control.SlideMenu.js"></script> <!-- plugin d'affichage du menu-->
 	
 	
 	<script>
@@ -80,7 +80,7 @@
 				streets   = L.tileLayer(mbUrl, {id: 'mapbox.streets', attribution: mbAttr});
 		  
 			// Affichage des couches GeoJSON
-		var contour = new L.GeoJSON.AJAX("http://localhost/DATA/Alsace_admin/testcontour.geojson", {style: stylecontour});
+		var contour = new L.GeoJSON.AJAX("DATA/Alsace_admin/testcontour.geojson", {style: stylecontour});
 			function stylecontour(feature){
 				return{
 					weight: 4,
@@ -90,7 +90,7 @@
 						};
 							} 
 
-		var aocparc = new L.GeoJSON.AJAX("http://localhost/DATA/Alsace_AOC/aocparc2.geojson", {style: styleaocparc});
+		var aocparc = new L.GeoJSON.AJAX("DATA/Alsace_AOC/aocparc2.geojson", {style: styleaocparc});
 			function styleaocparc(feature){
 				return{
 					weight: 1,
@@ -101,7 +101,7 @@
 						};
 							}
 			
-		var comviti = new L.GeoJSON.AJAX("http://localhost/DATA/Alsace_AOC/comviticole.geojson", {style: stylecomviti});
+		var comviti = new L.GeoJSON.AJAX("DATA/Alsace_AOC/comviticole.geojson", {style: stylecomviti});
 				function stylecomviti(feature){
 					return{
 						weight: 1,
@@ -113,8 +113,8 @@
 								}		
 		
 		
-		var pe = new L.GeoJSON.AJAX("http://localhost/DATA/PE/pe.geojson");
-			var sols = new L.GeoJSON.AJAX("http://localhost/DATA/Donn%c3%a9es%20sols/sols.geojson" ,{style:styleSOLS});
+		var pe = new L.GeoJSON.AJAX("DATA/PE/pe.geojson");
+			var sols = new L.GeoJSON.AJAX("hDATA/Donn%c3%a9es%20sols/sols.geojson" ,{style:styleSOLS});
 							function styleSOLS(feature){
   return{
     fillColor: getColor(feature.properties.PAYSAGE),

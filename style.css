@@ -1,0 +1,51 @@
+
+body{
+	background-image:url(vignes.jpg);
+		
+		width:90%;
+		height: 100%;
+        background-repeat:no-repeat;
+		background-size: 100% 100%;
+		padding-left: 50px;
+		
+		
+	
+}
+
+#entete{
+		height:100%;	
+
+}
+
+.tableau {
+	background-image:url(AVA logo.jpg);
+	margin-left: 10px;
+
+}
+
+td {
+	font-size: 40px;
+	padding-left: 200px;
+	text-align:center;
+	color: #87591A;
+}
+
+h2{
+	color:ThreedShadow;
+	text-align: center;
+}
+
+h3  {
+	text-align: center;
+}
+
+p {
+	text-align: center;
+}
+
+
+
+
+
+
+

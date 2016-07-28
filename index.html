@@ -77,8 +77,8 @@
 			
 			//Outil d'aafichage des couches initiales	
 			
-		  var  satellite  = L.tileLayer(mbUrl, {id: 'mapbox.satellite',opacity: 0.8, attribution: mbAttr, maxZoom: 18, minZoom : 13}),
-				streets   = L.tileLayer(mbUrl, {id: 'mapbox.streets', attribution: mbAttr, maxZoom: 13, minZoom : 0});
+		  var  satellite  = L.tileLayer(mbUrl, {id: 'mapbox.satellite',opacity: 0.8, attribution: mbAttr, maxZoom: 18, minZoom : 11}),
+				streets   = L.tileLayer(mbUrl, {id: 'mapbox.streets', attribution: mbAttr, maxZoom: 11, minZoom : 0});
 		  
 			// Affichage des couches GeoJSON
 		var contour = new L.GeoJSON.AJAX("DATA/Alsace_admin/testcontour.geojson", {style: stylecontour});

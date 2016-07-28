@@ -114,7 +114,7 @@
 								}		
 		
 		
-		var pe = new L.GeoJSON.AJAX("DATA/PE/pe2.geojson" );
+		var pe = new L.GeoJSON.AJAX("DATA/PE/pe2.geojson", {color: getRandomColor()} );
 	function getRandomColor() {
     var letters = '0123456789ABCDEF'.split('');
     var color = '#';

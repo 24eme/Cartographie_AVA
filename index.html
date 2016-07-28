@@ -77,8 +77,8 @@
 			
 			//Outil d'aafichage des couches initiales	
 			
-		  var  satellite  = L.tileLayer(mbUrl, {id: 'mapbox.satellite',opacity: 0.8, attribution: mbAttr}),
-				streets   = L.tileLayer(mbUrl, {id: 'mapbox.streets', attribution: mbAttr});
+		  var  satellite  = L.tileLayer(mbUrl, {id: 'mapbox.satellite',opacity: 0.8, attribution: mbAttr, maxZoom: 18, minZoom : 13}),
+				streets   = L.tileLayer(mbUrl, {id: 'mapbox.streets', attribution: mbAttr, maxZoom: 13, minZoom : 0});
 		  
 			// Affichage des couches GeoJSON
 		var contour = new L.GeoJSON.AJAX("DATA/Alsace_admin/testcontour.geojson", {style: stylecontour});
@@ -163,13 +163,12 @@ a== "Terrains schisteux et volcaniques" ? '#660099': //violet
 		
 	
 		var baseLayers = {
-			"Plan": streets,
-			"Imagerie": satellite
-			
+			"Plan": streets
 			
 		};
 
 		var overlays = {
+			"Imagerie": satellite,
 			"Contour Administratif": contour,
 			"Communes Viticoles": comviti,
 			"Parcelles AOC": aocparc,
@@ -180,9 +179,10 @@ a== "Terrains schisteux et volcaniques" ? '#660099': //violet
 
 		L.control.layers(baseLayers, overlays).addTo(map);
 		
-		//contour.addTo(map);
-		//aocparc.addTo(map);
-		//comviti.addTo(map);
+		satellite.addTo(map);
+		contour.addTo(map);
+		aocparc.addTo(map);
+		comviti.addTo(map);
 		pe.addTo(map);
 		sols.addTo(map);
 		
@@ -196,7 +196,7 @@ a== "Terrains schisteux et volcaniques" ? '#660099': //violet
 		//Echelle
 	L.control.scale({position:'bottomright', imperial: false}).addTo(map);
 
-//Changer le fond de carte: plan=>orthophoto avec le changement de zoom
+
 
 		// Insérer une fenêtre de menu pour le formulaire de recherche
 	

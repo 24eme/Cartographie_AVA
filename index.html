@@ -121,14 +121,14 @@
 						weight: 1,
 						opacity: 1,
 						color: '#CECECE', //contour
-						fillColor: getRandomColor2(), //remplissage avec une couleur aléatoire
+						fillColor: getRandomColor(), //remplissage avec une couleur aléatoire
 						fillOpacity: 0.6
 							};	
 		
 	}
 	
-	// fonction à enlever et peut etre ne garder que la fonction 	getRandomColor2()
-	function getRandomColor(feature,properties,NOM) { // A quoi servent les parametres? pas grand chose
+
+function getRandomColor() { // Du coup sans les parametres
     var letters = '0123456789ABCDEF'.split('');
     var color = '#';
     for (var i = 0; i < 6; i++ ) {
@@ -137,24 +137,11 @@
     return color;
 }
 
-function getRandomColor2() { // Du coup sans les parametres
-    var letters = '0123456789ABCDEF'.split('');
-    var color = '#';
-    for (var i = 0; i < 6; i++ ) {
-        color += letters[Math.floor(Math.random() * 16)];
-    }
-    return color;
-}
-
-/** CECI PEUT ETRE RETIRE, inutile **/
-
-getRandomColor(); // la tu appelles la fct mais tu ne l'applique à rien
 
 // si tu fais ça : 
 var maCouleurAleatoire = getRandomColor();
 console.log(maCouleurAleatoire); // ceci imprime dans la console firebug le contenu de maCouleurAleatoire
 
-/** jusqu'ici **/
 
 			var sols = new L.GeoJSON.AJAX("DATA/DonneesSols/paysages_ok.geojson" ,{style:styleSOLS});
 							function styleSOLS(feature){

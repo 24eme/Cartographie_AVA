@@ -39,7 +39,15 @@
 			</div> <!--fin div entete-->
 		
 
-	<div id="map" style="width:90%; height: 630px"></div>
+		<div id="contenu">
+				<div class="col1"><?php
+		include ('formulaire_rapide.php');
+		
+		?>
+			</div>
+			
+				<div class="col2"><div id="map" style="width:1200px; height: 630px"></div></div>
+				</div>
 
 		
         <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/leaflet.js"></script> <!-- Bibliothèque js Leaflet-->
@@ -220,7 +228,7 @@ a== "Terrains schisteux et volcaniques" ? '#660099': //violet
 
 		// Insérer une fenêtre de menu pour le formulaire de recherche
 	
-           	var right = '<h2>Formulaire de recherche</h2>';
+           /*	var right = '<h2>Formulaire de recherche</h2>';
             var contents = '<hr>';
             contents += '<h3><strong>Commune</strong></h3>';
             contents += '<p><input type="text" name="commune" placeholder="Nom de la commune"/>.<br></p>';
@@ -232,7 +240,7 @@ a== "Terrains schisteux et volcaniques" ? '#660099': //violet
 			
            
             var slideMenu = L.control.slideMenu('', {position: 'topleft', width: '200px', height: '400px'}).addTo(map);
-            slideMenu.setContents(right + contents);
+            slideMenu.setContents(right + contents);*/
 
 	
 

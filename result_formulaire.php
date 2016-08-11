@@ -270,7 +270,7 @@ a== "Terrains schisteux et volcaniques" ? "#660099": //violet
                   "none"; }  ';
         //et puis à un moment
         echo "		var map = L.map('map', {
-			center: [" . $result2_f['x'].' '. . ", " . $result2_f['y'] .  " ],
+			center: [" . $result2_f['x']. ", " . $result2_f['y'] .  " ],
 			zoom: 8,
 			layers: [streets, cities]
 		});"
